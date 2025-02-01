@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+}
+
+canvas {
+  display: block;
+}
+
+#menuButton {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 1000;
+  transition: background-color 0.3s;
+}
+
+#menuButton:hover {
+  background-color: rgba(207, 204, 193, 1);
+}
+
+#menuPanel {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  width: 250px;
+  background-color: rgba(207, 204, 193, 0.8);
+  border-radius: 8px;
+  padding: 20px;
+  display: none;
+  z-index: 999;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item {
+  margin-bottom: 20px;
+}
+
+.menu-item label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.menu-item input[type="range"] {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.menu-item .value-display {
+  text-align: center;
+  font-size: 14px;
+}
+
+#restartButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #bdb24f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+#restartButton:hover {
+  background-color: #ada345;
+} 

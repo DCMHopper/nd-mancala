@@ -79,11 +79,61 @@ class GameRenderer {
 class Game {
   constructor() {
     this.renderer = new GameRenderer();
+    this.initialStones = 4; // Default number of stones
     this.gameState = new GameState(2, 6);
     this.boardVisuals = renderBoard(this.gameState, this.renderer.scene);
     this.setupClickHandler();
     this.setupHoverHandler();
+    this.setupMenuHandlers();
     this.renderer.animate();
+  }
+
+  setupMenuHandlers() {
+    // Menu toggle button
+    const menuButton = document.getElementById('menuButton');
+    const menuPanel = document.getElementById('menuPanel');
+    menuButton.addEventListener('click', () => {
+      const isVisible = menuPanel.style.display === 'block';
+      menuPanel.style.display = isVisible ? 'none' : 'block';
+    });
+
+    // Stones slider
+    const stonesSlider = document.getElementById('stonesSlider');
+    const stonesValue = document.getElementById('stonesValue');
+    stonesSlider.addEventListener('input', (event) => {
+      const value = event.target.value;
+      stonesValue.textContent = value;
+      this.initialStones = parseInt(value);
+    });
+
+    // Restart button
+    const restartButton = document.getElementById('restartButton');
+    restartButton.addEventListener('click', () => {
+      this.restartGame();
+    });
+  }
+
+  restartGame() {
+    // Create a new game state with the current number of initial stones
+    this.gameState = new GameState(2, 6);
+    
+    // Update the initial stones in the game state
+    for (let player = 1; player <= 2; player++) {
+      for (let pos = 0; pos < this.gameState.pocketsPerSide; pos++) {
+        this.gameState.setStonesAt(player, pos, this.initialStones);
+      }
+    }
+    
+    // Reset mancalas
+    this.gameState.mancalas.player1 = 0;
+    this.gameState.mancalas.player2 = 0;
+    
+    // Reset current player to 1
+    this.gameState.currentPlayer = 1;
+    
+    // Update the visual board
+    updateBoard(this.boardVisuals, this.gameState, this.renderer.scene);
+    clearHighlights(this.boardVisuals);
   }
 
   setupClickHandler() {

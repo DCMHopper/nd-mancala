@@ -7,21 +7,21 @@ export class GameState {
   /**
    * @param {number} dimensions - Number of dimensions for the board
    * @param {number} pocketsPerSide - Number of pockets per player
+   * @param {number} [initialStones=4] - Initial number of stones per pocket
    */
-  constructor(dimensions, pocketsPerSide) {
+  constructor(dimensions, pocketsPerSide, initialStones = 4) {
     this.dimensions = dimensions;
     this.pocketsPerSide = pocketsPerSide;
     this.currentPlayer = 1; // 1 or 2
-    this.initialize();
+    this.initialize(initialStones);
   }
 
   /**
    * Initialize the game state
+   * @param {number} initialStones - Number of stones to start in each pocket
    * @private
    */
-  initialize() {
-    const initialStones = 4;
-    
+  initialize(initialStones) {
     // Create separate matrices for each player
     this.player1Board = matrix(Array(this.pocketsPerSide).fill(initialStones));
     this.player2Board = matrix(Array(this.pocketsPerSide).fill(initialStones));
